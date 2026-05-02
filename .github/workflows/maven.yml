@@ -27,6 +27,18 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Chạy Checkstyle để sinh báo cáo
+        run: mvn checkstyle:checkstyle
+        continue-on-error: true # Cho phép chạy tiếp để Bot kịp review dù có lỗi
+
+      - name: Bot thả comment vào Pull Request
+        if: github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest'
+        uses: dbelyaev/action-checkstyle@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          checkstyle_config: google_checks.xml # Đảm bảo file cấu hình này có trong dự án của em
+
       - name: Build và kiểm tra dự án (Verify)
         run: mvn -B verify --file pom.xml
       # 3. Đổi tên file Artifact
@@ -36,14 +48,3 @@ jobs:
         with:
           name: BankSystem-Artifact-${{ matrix.os }}
           path: target/*.jar
-      - name: Chạy Checkstyle để sinh báo cáo
-        run: mvn checkstyle:checkstyle
-        continue-on-error: true # Cho phép chạy tiếp để Bot kịp review dù có lỗi
-
-      - name: Bot thả comment vào Pull Request
-        if: github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest'
-        uses: dbelyaev/action-checkstyle@master
-        with:
-                github_token: ${{ secrets.GITHUB_TOKEN }}
-                reporter: github-pr-review
-                checkstyle_config: google_checks.xml # Đảm bảo file cấu hình này có trong dự án của em
