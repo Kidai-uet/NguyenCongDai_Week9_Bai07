@@ -1,5 +1,3 @@
-package main.java;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -188,4 +186,5 @@ public abstract class Account {
     int result = (int) (accountNumber ^ (accountNumber >>> 32));
     return result;
   }
+  public void TinhTong_SaiQuyTac() {}
 }

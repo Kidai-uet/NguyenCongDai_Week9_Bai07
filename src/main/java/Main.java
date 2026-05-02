@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * Lớp thực thi chương trình chính.
  */

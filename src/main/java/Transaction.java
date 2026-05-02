@@ -1,5 +1,3 @@
-package main.java;
-
 import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
