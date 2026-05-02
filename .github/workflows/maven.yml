@@ -41,7 +41,7 @@ jobs:
         continue-on-error: true # Cho phép chạy tiếp để Bot kịp review dù có lỗi
 
       - name: Bot thả comment vào Pull Request
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest'
         uses: dbelyaev/action-checkstyle@master
         with:
                 github_token: ${{ secrets.GITHUB_TOKEN }}
