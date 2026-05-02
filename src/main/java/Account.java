@@ -187,4 +187,5 @@ public abstract class Account {
     return result;
   }
   public void TinhTong_SaiQuyTac() {}
+  public void TinhTong_SaiQuyTac1() {}
 }
